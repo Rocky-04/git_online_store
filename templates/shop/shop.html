@@ -1,0 +1,144 @@
+{% extends 'base.html' %}}
+{% load static %}
+{% load shop_tags %}
+{% load i18n %}
+{% block content %}
+
+
+
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+
+            <div class="col-lg-3 col-md-4">
+
+ <form method="get">{% csrf_token %}
+
+                    <input type="hidden" name="title" value="{{title}}">
+                <input type="hidden" name="parent" value="{{parent}}">
+                <input type="hidden" name="product_list_pk" value="{{product_list_pk}}">
+
+
+
+
+                <h5 class="section-title position-relative text-uppercase mb-3"><span
+                        class="bg-secondary pr-3">{% trans 'Ціна' %}</span>
+                </h5>
+                <div class="bg-light p-4 mb-30">
+
+                    <div class="input-group ">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">{% trans 'Мінімальна вартість' %}</span>
+                        </div>
+                        <input type="text" class="form-control" name="min_price" id="input_text1"
+                               max="5000" value="0" onchange="rangeinput1.value = input_text1.value"/>
+                        <input type="range" oninput="input_text1.value = rangeinput1.value"
+                               class="form-control-range slider"  min="0" max="5000" value="0"
+                               id="rangeinput1" step="1" onchange="input_text1.value = rangeinput1.value"></div>
+
+
+                    <div class="input-group ">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">{% trans 'Максимальна вартість' %}</span>
+                        </div>
+                        <input type="text" class="form-control" name="max_price" id="input_text2"
+                               max="5000" value="5000" onchange="rangeinput2.value = input_text2.value"/>
+                        <input type="range" oninput="input_text2.value = rangeinput2.value"
+                               class="form-control-range slider"  min="0" max="5000" value="5000"
+                               id="rangeinput2" step="2" onchange="input_text2.value = rangeinput2.value"></div>
+                </div>
+
+
+                <h5 class="section-title position-relative text-uppercase mb-3"><span
+                        class="bg-secondary pr-3">{% trans 'Колір' %}</span>
+                </h5>
+                <div class="bg-light p-4 mb-30">
+
+                    {% for color in color_filter %}
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" id="{{color}}" name="color"
+                               value="{{color.id}}">
+                        <label class="custom-control-label" for="{{color}}">{{color}}</label>
+                        <span class="badge border font-weight-normal">{{color.cnt}}</span>
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+                <h5 class="section-title position-relative text-uppercase mb-3"><span
+                        class="bg-secondary pr-3">{% trans 'Розмір' %}</span>
+                </h5>
+                <div class="bg-light p-4 mb-30">
+                    {% for size in size_filter %}
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" id="{{size}}" name="size"
+                               value="{{size.id}}">
+                        <label class="custom-control-label" for="{{size}}">{{size}}</label>
+                        <span class="badge border font-weight-normal">{{size.cnt}}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <h5 class="section-title position-relative text-uppercase mb-3"><span
+                        class="bg-secondary pr-3">{% trans 'Бренд' %}</span>
+                </h5>
+                <div class="bg-light p-4 mb-30">
+                    {% for manufacturer in manufacturer_filter %}
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" id="{{manufacturer}}" name="manufacturer"
+                               value="{{manufacturer.id}}">
+                        <label class="custom-control-label" for="{{manufacturer}}">{{manufacturer}}</label>
+                        <span class="badge border font-weight-normal">{{manufacturer.cnt}}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+
+
+                <button class="btn btn-primary px-8" style="width: 150px; height: 50px;" title="Застосувати фільтри"
+                        formaction="{% url 'filter'%}">
+                    <i class="fa fa-filter"> {% trans 'Застосувати фільтри' %}</i></button>
+                <button class="btn btn-danger px-8" style="width: 150px; height: 50px;" title="Відмінити фільтри"
+                        formaction="{% url 'skip_filter'%}">
+                    <i class="fa fa-filter"> {% trans 'Відмінити фільтри' %}</i></button>
+</form>
+            </div>
+
+<!-- Shop Sidebar End -->
+
+
+<!-- Shop Product Start -->
+<div class="col-lg-9 col-md-8">
+    <div class="row pb-3">
+
+
+
+        {% show_category title=title parent=parent%}
+
+        <div class="container-fluid pt-5 pb-3">
+            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span
+                    class="bg-secondary pr-3">{{title}}</span></h2>
+        </div>
+        {% for item in products %}
+        <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+            {% show_card_product item %}
+        </div>
+        {% empty %}
+
+        <div class="container-fluid pt-5">
+            <h2 class="section-title  text-uppercase mx-xl-5 mb-4"><span
+                    class="text-warning"> {% trans 'Вже додаємо товар в цю категорію...' %}
+                <br>
+                {% trans 'Спробуйте зайти пізніше' %} </span>
+            </h2>
+        </div>
+        {% endfor %}
+
+
+        {% include 'inc/paginator.html' %}
+
+    </div>
+</div>
+<!-- Shop Product End -->
+</div>
+</div>
+
+{% endblock %}
