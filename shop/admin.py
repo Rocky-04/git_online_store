@@ -67,7 +67,6 @@ class ProductAdminLevel(NestedModelAdmin, TranslationAdmin):
     readonly_fields = ('created_at',)
     save_as = True
     save_on_top = True
-    ordering = ('-created_at',)
     inlines = [AttributeColorInlineLevelOne]
 
 

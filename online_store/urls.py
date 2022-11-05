@@ -19,6 +19,8 @@ from django.urls import path
 from django.urls import re_path
 from django.views.static import serve as mediaserve
 
+from shop.views import PageNotFoundView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('favorite/', include('favorite.urls')),
@@ -47,3 +49,5 @@ else:
         re_path(f'^{settings.STATIC_URL.lstrip("/")}(?P<path>.*)$',
                 mediaserve, {'document_root': settings.STATIC_ROOT}),
     ]
+
+handler404 = PageNotFoundView.as_view()

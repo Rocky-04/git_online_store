@@ -6,8 +6,8 @@ from django.utils.translation import gettext_lazy as _
 from django.views import View
 from django.views.generic import DetailView
 from django.views.generic import TemplateView
-
 from online_store.settings import EMAIL_HOST_USER
+
 from .forms import ReviewsForm
 from .utils import *
 
@@ -252,3 +252,9 @@ class AddReviewView(View):
             return HttpResponseRedirect(current)
         else:
             return JsonResponse({'success': False, 'error': 'Not found user'}, status=400)
+
+
+class PageNotFoundView(TemplateView):
+    template_name = 'shop/page_not_found.html'
+
+
