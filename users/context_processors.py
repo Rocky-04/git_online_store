@@ -2,5 +2,5 @@ from .forms import SubscriberEmailForm
 
 
 def getting_subscribe_email_form(request):
-    form = SubscriberEmailForm
+    subscriber_email_form = SubscriberEmailForm
     return locals()

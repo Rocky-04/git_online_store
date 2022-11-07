@@ -39,9 +39,14 @@
 
 
                     <form method="post" action="{% url 'subscriber_email' %}" >{% csrf_token %}
+                        <input type="hidden" name="current" value="{{ request.get_full_path }}">
                         <div class="input-group">
-
-                         {{ form.email }}
+                            {% for field in subscriber_email_form %}
+                            {% if field.errors%}
+                            {{field.errors}}
+                            {% endif %}
+                         {{ field }}
+                            {% endfor %}
                             <div class="input-group-append">
                                 <button class="btn btn-block btn-primary " >{% trans 'Відправити'%}</button>
                             </div>

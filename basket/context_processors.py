@@ -2,6 +2,10 @@ from .models import ProductInBasket
 
 
 def getting_basket_info(request):
+    """
+    Creates a list of the user's products in the basket.
+    Creates a variable for the number of items in the basket.
+    """
     if request.user.is_authenticated:
         session_key = request.user.email
     else:

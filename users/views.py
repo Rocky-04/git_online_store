@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.contrib.auth.views import LoginView
@@ -5,7 +6,9 @@ from django.contrib.auth.views import PasswordResetConfirmView as PasswordResetC
 from django.contrib.auth.views import PasswordResetView as PasswordResetView_
 from django.db.models import Q
 from django.http import Http404
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView
@@ -109,11 +112,17 @@ class PasswordResetConfirmView(PasswordResetConfirmView_):
     form_class = SetPasswordForm
 
 
-class SubscriberEmailView(CreateView):
-    form_class = SubscriberEmailForm
-    success_url = reverse_lazy('home')
-    model = EmailForNews
-    template_name = 'users/subscriber_email.html'
+def subscriber_email(request):
+    current = request.POST.get('current')
+    if request.method == 'POST':
+        form = SubscriberEmailForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, _('Email додано'))
+            return HttpResponseRedirect(current)
+    else:
+        form = SubscriberEmailForm()
+    return render(request, 'users/subscriber_email.html', {'form': form})
 
 
 class CommunicationView(UpdateView):

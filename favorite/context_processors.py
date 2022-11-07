@@ -2,6 +2,10 @@ from .models import Favorite
 
 
 def add_favorites(request):
+    """
+    Creates a list of the user's products in the favorite.
+    Creates a variable for the number of items in the favorite.
+    """
     if request.user.is_authenticated:
         session_key = request.user.email
     else:

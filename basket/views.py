@@ -7,9 +7,12 @@ from .ultis import BasketMixin
 
 
 class BasketAddView(BasketMixin, View):
+    """
+    Adds products in the basket
+    """
+
     def post(self, request, *args, **kwargs):
         super().post(request, *args, **kwargs)
-
         try:
             new_product, created = ProductInBasket.objects.get_or_create(session_key=self.session_key,
                                                                          product_id=self.product_id,
@@ -28,6 +31,10 @@ class BasketAddView(BasketMixin, View):
 
 
 class BasketRemoveView(BasketMixin, View):
+    """
+    Removes products in the basket
+    """
+
     def post(self, request, *args, **kwargs):
         super().post(request, *args, **kwargs)
 
@@ -42,6 +49,10 @@ class BasketRemoveView(BasketMixin, View):
 
 
 class ViewCart(BasketMixin, View):
+    """
+    Views products in the basket
+    """
+
     template_name = 'basket/basket.html'
 
     def get(self, request):
@@ -60,6 +71,10 @@ class ViewCart(BasketMixin, View):
 
 
 class EditCartView(BasketMixin, View):
+    """
+    Edits count products in the basket
+    """
+
     def post(self, request, *args, **kwargs):
         super().post(request, *args, **kwargs)
 

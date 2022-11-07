@@ -7,6 +7,10 @@ from .models import Favorite
 
 
 class FavoriteAddView(View):
+    """
+    Adds products in the favorite
+    """
+
     def post(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             session_key = request.user.email
@@ -28,6 +32,10 @@ class FavoriteAddView(View):
 
 
 class FavoriteRemoveView(View):
+    """
+    Removes products in the favorite
+    """
+
     def post(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             session_key = request.user.email
@@ -49,6 +57,10 @@ class FavoriteRemoveView(View):
 
 
 class FavotiteView(View):
+    """
+    Views products in the favorite
+    """
+
     def get(self, request):
         if request.user.is_authenticated:
             session_key = request.user.email

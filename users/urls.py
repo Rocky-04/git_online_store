@@ -12,7 +12,7 @@ urlpatterns = [
     path('password_reset/', PasswordResetView.as_view(), name='password_reset'),
     path("reset/<uidb64>/<token>/", PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
     path('', include('django.contrib.auth.urls')),
-    path('subscriber_email', SubscriberEmailView.as_view(), name='subscriber_email'),
+    path('subscriber_email', subscriber_email, name='subscriber_email'),
     path('my_product_review', MyProductReviewView.as_view(), name='my_product_review'),
     path('communication', CommunicationView.as_view(), name='communication'),
 ]
