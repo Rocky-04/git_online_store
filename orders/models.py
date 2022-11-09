@@ -11,8 +11,10 @@ from users.models import User
 
 
 class Order(models.Model):
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
-    first_name = models.CharField(max_length=200, blank=True, verbose_name=_('First name'))
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True,
+                             null=True)
+    first_name = models.CharField(max_length=200, blank=True,
+                                  verbose_name=_('First name'))
     last_name = models.CharField(max_length=200, blank=True)
     email = models.EmailField(blank=True)
     city = models.CharField(max_length=200, blank=True)
@@ -22,11 +24,17 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
     additional_information = models.TextField(max_length=300, blank=True)
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    status = models.ForeignKey('Status', default=1, on_delete=models.SET_NULL, blank=True, null=True)
-    delivery = models.ForeignKey(Delivery, on_delete=models.SET_NULL, blank=True, null=True, default=None)
-    payment_method = models.ForeignKey('PaymentMethod', on_delete=models.SET_NULL, blank=True, null=True, default=None)
-    promo_code = models.ForeignKey('PromoCode', on_delete=models.SET_NULL, blank=True, null=True)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2,
+                                      default=0)
+    status = models.ForeignKey('Status', default=1, on_delete=models.SET_NULL,
+                               blank=True, null=True)
+    delivery = models.ForeignKey(Delivery, on_delete=models.SET_NULL,
+                                 blank=True, null=True, default=None)
+    payment_method = models.ForeignKey('PaymentMethod',
+                                       on_delete=models.SET_NULL, blank=True,
+                                       null=True, default=None)
+    promo_code = models.ForeignKey('PromoCode', on_delete=models.SET_NULL,
+                                   blank=True, null=True)
 
     def __str__(self):
         return str(self.id)
@@ -37,14 +45,20 @@ class Order(models.Model):
 
 
 class GoodsInTheOrder(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True, default=None)
-    color = models.ForeignKey(AttributeColor, on_delete=models.SET_NULL, blank=True, null=True, default=None)
-    size = models.ForeignKey(AttributeSize, on_delete=models.SET_NULL, blank=True, null=True, default=None)
-    order = models.ForeignKey(Order, related_name="goods_in_the_order", on_delete=models.CASCADE, blank=True, null=True,
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True,
+                                null=True, default=None)
+    color = models.ForeignKey(AttributeColor, on_delete=models.SET_NULL,
+                              blank=True, null=True, default=None)
+    size = models.ForeignKey(AttributeSize, on_delete=models.SET_NULL,
+                             blank=True, null=True, default=None)
+    order = models.ForeignKey(Order, related_name="goods_in_the_order",
+                              on_delete=models.CASCADE, blank=True, null=True,
                               default=None)
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2,
+                                      default=0)
     nmb = models.IntegerField(default=1)
-    price_per_item = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    price_per_item = models.DecimalField(max_digits=10, decimal_places=2,
+                                         default=0)
 
     def __str__(self):
         return self.product.title

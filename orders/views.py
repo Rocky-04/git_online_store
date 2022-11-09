@@ -20,17 +20,20 @@ class CheckoutView(CreateView):
             session_key = self.request.user.email
         else:
             session_key = self.request.session.session_key
-        products_in_basket = ProductInBasket.objects.filter(session_key=session_key)
+        products_in_basket = ProductInBasket.objects.filter(
+            session_key=session_key)
         if len(products_in_basket) > 0:
             self.object = form.save()
             if form.data['promo_code']:
-                promo_code = PromoCode.objects.get(title=form.data['promo_code'])
+                promo_code = PromoCode.objects.get(
+                    title=form.data['promo_code'])
                 self.object.promo_code = promo_code
             if self.request.user.is_authenticated:
                 self.object.user = self.request.user
 
         else:
-            return JsonResponse({'success': False, 'error': 'Empty basket'}, status=400)
+            return JsonResponse({'success': False, 'error': 'Empty basket'},
+                                status=400)
 
         for item in products_in_basket:
             print(item)

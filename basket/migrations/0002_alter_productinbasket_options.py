@@ -11,6 +11,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='productinbasket',
-            options={'verbose_name': 'Goods in the basket', 'verbose_name_plural': 'Goods in the basket'},
+            options={'verbose_name': 'Goods in the basket',
+                     'verbose_name_plural': 'Goods in the basket'},
         ),
     ]

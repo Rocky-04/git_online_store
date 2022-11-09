@@ -19,7 +19,8 @@ class NewsView(ListView):
         return context
 
     def get_queryset(self):
-        return News.objects.filter(is_published=True).select_related('category')
+        return News.objects.filter(is_published=True).select_related(
+            'category')
 
 
 class NewsCategoryView(ListView):
@@ -31,7 +32,9 @@ class NewsCategoryView(ListView):
     paginate_by = 5
 
     def get_queryset(self):
-        return News.objects.filter(category__slug=self.kwargs['slug'], is_published=True).select_related('category')
+        return News.objects.filter(category__slug=self.kwargs['slug'],
+                                   is_published=True).select_related(
+            'category')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)

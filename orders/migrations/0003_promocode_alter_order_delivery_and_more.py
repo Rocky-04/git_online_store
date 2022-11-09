@@ -8,14 +8,17 @@ from django.db import models
 class Migration(migrations.Migration):
     dependencies = [
         ('shop', '0008_delete_status'),
-        ('orders', '0002_alter_goodsintheorder_product_alter_order_first_name_and_more'),
+        ('orders',
+         '0002_alter_goodsintheorder_product_alter_order_first_name_and_more'),
     ]
 
     operations = [
         migrations.CreateModel(
             name='PromoCode',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True,
+                                           serialize=False,
+                                           verbose_name='ID')),
                 ('title', models.CharField(max_length=200)),
                 ('price', models.IntegerField(default=0)),
                 ('is_active', models.BooleanField(default=True)),
@@ -24,25 +27,29 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='order',
             name='delivery',
-            field=models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.SET_NULL,
+            field=models.ForeignKey(blank=True, default=None, null=True,
+                                    on_delete=django.db.models.deletion.SET_NULL,
                                     to='shop.delivery'),
         ),
         migrations.AlterField(
             model_name='order',
             name='payment_method',
-            field=models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.SET_NULL,
+            field=models.ForeignKey(blank=True, default=None, null=True,
+                                    on_delete=django.db.models.deletion.SET_NULL,
                                     to='orders.paymentmethod'),
         ),
         migrations.AlterField(
             model_name='order',
             name='status',
-            field=models.ForeignKey(blank=True, default=1, null=True, on_delete=django.db.models.deletion.SET_NULL,
+            field=models.ForeignKey(blank=True, default=1, null=True,
+                                    on_delete=django.db.models.deletion.SET_NULL,
                                     to='orders.status'),
         ),
         migrations.AddField(
             model_name='order',
             name='promo_code',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL,
+            field=models.ForeignKey(blank=True, null=True,
+                                    on_delete=django.db.models.deletion.SET_NULL,
                                     to='orders.promocode'),
         ),
     ]

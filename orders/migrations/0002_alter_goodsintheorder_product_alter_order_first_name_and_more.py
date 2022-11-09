@@ -15,13 +15,15 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='goodsintheorder',
             name='product',
-            field=models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.SET_NULL,
+            field=models.ForeignKey(blank=True, default=None, null=True,
+                                    on_delete=django.db.models.deletion.SET_NULL,
                                     to='shop.product'),
         ),
         migrations.AlterField(
             model_name='order',
             name='first_name',
-            field=models.CharField(blank=True, max_length=200, verbose_name='First name'),
+            field=models.CharField(blank=True, max_length=200,
+                                   verbose_name='First name'),
         ),
         migrations.AlterField(
             model_name='order',

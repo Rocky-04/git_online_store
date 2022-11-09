@@ -13,31 +13,37 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='tag',
             name='description_en',
-            field=models.TextField(blank=True, default=None, null=True, verbose_name='Опис'),
+            field=models.TextField(blank=True, default=None, null=True,
+                                   verbose_name='Опис'),
         ),
         migrations.AddField(
             model_name='tag',
             name='description_uk',
-            field=models.TextField(blank=True, default=None, null=True, verbose_name='Опис'),
+            field=models.TextField(blank=True, default=None, null=True,
+                                   verbose_name='Опис'),
         ),
         migrations.AddField(
             model_name='tag',
             name='title_en',
-            field=models.CharField(max_length=50, null=True, unique=True, verbose_name='Назва'),
+            field=models.CharField(max_length=50, null=True, unique=True,
+                                   verbose_name='Назва'),
         ),
         migrations.AddField(
             model_name='tag',
             name='title_two_en',
-            field=models.CharField(blank=True, max_length=50, null=True, verbose_name='Назва 2'),
+            field=models.CharField(blank=True, max_length=50, null=True,
+                                   verbose_name='Назва 2'),
         ),
         migrations.AddField(
             model_name='tag',
             name='title_two_uk',
-            field=models.CharField(blank=True, max_length=50, null=True, verbose_name='Назва 2'),
+            field=models.CharField(blank=True, max_length=50, null=True,
+                                   verbose_name='Назва 2'),
         ),
         migrations.AddField(
             model_name='tag',
             name='title_uk',
-            field=models.CharField(max_length=50, null=True, unique=True, verbose_name='Назва'),
+            field=models.CharField(max_length=50, null=True, unique=True,
+                                   verbose_name='Назва'),
         ),
     ]

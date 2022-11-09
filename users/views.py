@@ -2,7 +2,8 @@ from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.contrib.auth.views import LoginView
-from django.contrib.auth.views import PasswordResetConfirmView as PasswordResetConfirmView_
+from django.contrib.auth.views import \
+    PasswordResetConfirmView as PasswordResetConfirmView_
 from django.contrib.auth.views import PasswordResetView as PasswordResetView_
 from django.db.models import Q
 from django.http import Http404
@@ -37,14 +38,16 @@ class LoginUserView(LoginView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Авторизація'
+        context['title'] = _('Авторизація')
         return context
 
     def form_valid(self, form):
         session_key = self.request.session.session_key
         user = form.data['username']
-        ProductInBasket.objects.filter(session_key=session_key).update(session_key=user)
-        Favorite.objects.filter(session_key=session_key).update(session_key=user)
+        ProductInBasket.objects.filter(session_key=session_key).update(
+            session_key=user)
+        Favorite.objects.filter(session_key=session_key).update(
+            session_key=user)
         return super().form_valid(form)
 
 
@@ -54,14 +57,16 @@ class RegisterUserView(CreateView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Реєстрація'
+        context['title'] = _('Реєстрація')
         return context
 
     def form_valid(self, form):
         user = form.save()
         session_key = self.request.session.session_key
-        ProductInBasket.objects.filter(session_key=session_key).update(session_key=user.email)
-        Favorite.objects.filter(session_key=session_key).update(session_key=user.email)
+        ProductInBasket.objects.filter(session_key=session_key).update(
+            session_key=user.email)
+        Favorite.objects.filter(session_key=session_key).update(
+            session_key=user.email)
         EmailForNews.objects.create(email=user.email)
         login(self.request, user)
         return redirect('home')
@@ -73,7 +78,8 @@ class AccountUserView(TemplateView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         orders = Order.objects.filter(Q(user=self.request.user) |
-                                      Q(email=self.request.user.email)).order_by('-id')
+                                      Q(email=self.request.user.email)).order_by(
+            '-id')
 
         context['orders'] = orders
         context['title'] = _('Мої замовлення')
@@ -137,7 +143,8 @@ class CommunicationView(UpdateView):
                 obj = EmailForNews.objects.get(email=self.request.user.email)
             except Exception as ex:
                 print(ex)
-                obj = EmailForNews.objects.create(email=self.request.user.email)
+                obj = EmailForNews.objects.create(
+                    email=self.request.user.email)
 
             return obj
         raise Http404()

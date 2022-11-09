@@ -11,6 +11,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='favorite',
-            options={'verbose_name': 'Favorite', 'verbose_name_plural': 'Favorites'},
+            options={'verbose_name': 'Favorite',
+                     'verbose_name_plural': 'Favorites'},
         ),
     ]

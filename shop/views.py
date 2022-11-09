@@ -16,31 +16,40 @@ class FilterView(ShopMixin):
     def get_queryset(self):
         min_price = self.request.GET.get('min_price')
         max_price = self.request.GET.get('max_price')
-        self.product_list_pk = [int(i) for i in self.request.GET.get('product_list_pk')[1:-1].split(', ')]
+        self.product_list_pk = [int(i) for i in
+                                self.request.GET.get('product_list_pk')[
+                                1:-1].split(', ')]
 
         if self.request.GET.getlist("color"):
             filter_color = AttributeColor.objects.filter(
-                Q(color__in=self.request.GET.getlist("color"))).values_list('product', flat=True)
+                Q(color__in=self.request.GET.getlist("color"))).values_list(
+                'product', flat=True)
         else:
-            filter_color = AttributeColor.objects.all().values_list('product', flat=True)
+            filter_color = AttributeColor.objects.all().values_list('product',
+                                                                    flat=True)
 
         if self.request.GET.getlist("size"):
             filter_size = AttributeSize.objects.filter(
-                Q(size__in=self.request.GET.getlist("size"))).values_list('product__product', flat=True)
+                Q(size__in=self.request.GET.getlist("size"))).values_list(
+                'product__product', flat=True)
         else:
-            filter_size = AttributeSize.objects.all().values_list('product__product', flat=True)
+            filter_size = AttributeSize.objects.all().values_list(
+                'product__product', flat=True)
 
         if self.request.GET.getlist("manufacturer"):
             filter_manufacturer = Manufacturer.objects.filter(
-                Q(id__in=self.request.GET.getlist("manufacturer"))).values_list('manufacturer', flat=True)
+                Q(id__in=self.request.GET.getlist(
+                    "manufacturer"))).values_list('manufacturer', flat=True)
         else:
-            filter_manufacturer = Manufacturer.objects.all().values_list('manufacturer', flat=True)
+            filter_manufacturer = Manufacturer.objects.all().values_list(
+                'manufacturer', flat=True)
 
         queryset = Product.objects.filter(Q(pk__in=self.product_list_pk) &
                                           Q(pk__in=filter_color) &
                                           Q(pk__in=filter_size) &
                                           Q(pk__in=filter_manufacturer) &
-                                          Q(price_now__gte=min_price, price_now__lte=max_price))
+                                          Q(price_now__gte=min_price,
+                                            price_now__lte=max_price))
 
         return queryset
 
@@ -52,7 +61,9 @@ class FilterView(ShopMixin):
 
 class SkipFilterView(ShopMixin):
     def get_queryset(self):
-        self.product_list_pk = [int(i) for i in self.request.GET.get('product_list_pk')[1:-1].split(', ')]
+        self.product_list_pk = [int(i) for i in
+                                self.request.GET.get('product_list_pk')[
+                                1:-1].split(', ')]
         queryset = Product.objects.filter(pk__in=self.product_list_pk)
         return queryset
 
@@ -73,7 +84,8 @@ class CategoryView(ShopMixin):
     slug_url_kwarg = 'slug'
 
     def get_queryset(self):
-        list_categories_pk = Category.objects.get(slug=self.kwargs['slug']).get_list_nested_categories()
+        list_categories_pk = Category.objects.get(
+            slug=self.kwargs['slug']).get_list_nested_categories()
         product = Product.objects.filter(category_id__in=list_categories_pk)
         self.product_list_pk = list(product.values_list('pk', flat=True))
         return product
@@ -90,7 +102,8 @@ class TagView(ShopMixin):
     slug_url_kwarg = 'slug'
 
     def get_queryset(self):
-        product = Product.objects.filter(tags=Tag.objects.get(slug=self.kwargs['slug']))
+        product = Product.objects.filter(
+            tags=Tag.objects.get(slug=self.kwargs['slug']))
         self.product_list_pk = list(product.values_list('pk', flat=True))
         return product
 
@@ -106,7 +119,8 @@ class BrandView(ShopMixin):
     slug_url_kwarg = 'slug'
 
     def get_queryset(self):
-        product = Product.objects.filter(manufacturer=Manufacturer.objects.get(slug=self.kwargs['slug']))
+        product = Product.objects.filter(
+            manufacturer=Manufacturer.objects.get(slug=self.kwargs['slug']))
         self.product_list_pk = list(product.values_list('pk', flat=True))
         return product
 
@@ -154,9 +168,11 @@ class SendUserMailView(TemplateView):
             if mail:
                 messages.success(request, _('Лист відправлено'))
             else:
-                messages.error(request, _('Помилка при відправці листа. Спробуйте пізніше'))
+                messages.error(request,
+                               _('Помилка при відправці листа. Спробуйте пізніше'))
         else:
-            messages.error(request, _('Помилка при відправці листа. Спробуйте пізніше'))
+            messages.error(request,
+                           _('Помилка при відправці листа. Спробуйте пізніше'))
 
         return render(request, self.template_name)
 
@@ -179,13 +195,17 @@ class ProductDetailView(DetailView):
             elif product.available:
                 context['active_color'] = product.get_active_color()[0]
             else:
-                context['active_color'] = AttributeColor.objects.filter(product=product)[0]
+                context['active_color'] = \
+                    AttributeColor.objects.filter(product=product)[0]
             if active_size is not None:
-                context['active_size'] = context['active_color'].attribute_size.get(size_id=active_size)
+                context['active_size'] = context[
+                    'active_color'].attribute_size.get(size_id=active_size)
             elif context['active_color'].available:
-                context['active_size'] = context['active_color'].get_active_size()[0]
+                context['active_size'] = \
+                    context['active_color'].get_active_size()[0]
             else:
-                context['active_size'] = context['active_color'].get_all_size()[0]
+                context['active_size'] = \
+                    context['active_color'].get_all_size()[0]
         except Exception as e:
             print(e)
 
@@ -225,7 +245,8 @@ class SearchView(ListView):
         return context
 
     def get_queryset(self):
-        return Product.objects.filter(title__icontains=self.request.GET.get('text'))
+        return Product.objects.filter(
+            title__icontains=self.request.GET.get('text'))
 
 
 class AddReviewView(View):
@@ -251,7 +272,8 @@ class AddReviewView(View):
                                        rating=rating)
             return HttpResponseRedirect(current)
         else:
-            return JsonResponse({'success': False, 'error': 'Not found user'}, status=400)
+            return JsonResponse({'success': False, 'error': 'Not found user'},
+                                status=400)
 
 
 class PageNotFoundView(TemplateView):

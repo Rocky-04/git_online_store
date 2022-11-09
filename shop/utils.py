@@ -22,15 +22,18 @@ class ShopMixin(ListView):
         context['product_list_pk'] = self.product_list_pk
 
         context['color_filter'] = Color.objects.annotate(
-            cnt=Count('color__product', filter=Q(color__product__in=self.product_list_pk))). \
+            cnt=Count('color__product',
+                      filter=Q(color__product__in=self.product_list_pk))). \
             filter(cnt__gt=0).order_by('-cnt')
 
         context['size_filter'] = Size.objects.annotate(
-            cnt=Count('size__product__product', filter=Q(size__product__product__in=self.product_list_pk))). \
+            cnt=Count('size__product__product', filter=Q(
+                size__product__product__in=self.product_list_pk))). \
             filter(cnt__gt=0).order_by('-cnt')
 
         context['manufacturer_filter'] = Manufacturer.objects.annotate(
-            cnt=Count('manufacturer', filter=Q(manufacturer__in=self.product_list_pk))). \
+            cnt=Count('manufacturer',
+                      filter=Q(manufacturer__in=self.product_list_pk))). \
             filter(cnt__gt=0).order_by('-cnt')
 
         return context

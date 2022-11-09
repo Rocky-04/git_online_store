@@ -9,7 +9,8 @@ Here's what did change in an incompatible way:
 
 - We're now prefixing all classes located in [CSS classes reference][cr] with
   `hljs-`, by default, because some class names would collide with other
-  people's stylesheets. If you were using an older version, you might still want
+  people's stylesheets. If you were using an older version, you might still
+  want
   the previous behavior, but still want to upgrade. To suppress this new
   behavior, you would initialize like so:
 
@@ -28,7 +29,8 @@ Here's what did change in an incompatible way:
 
 - We removed public-facing (though undocumented) object `hljs.LANGUAGES` which
   was used to register languages with the library in favor of two new methods:
-  `registerLanguage` and `getLanguage`. Both are documented in our [API docs][].
+  `registerLanguage` and `getLanguage`. Both are documented in our [API docs][]
+  .
 
 - Result returned from `highlight` and `highlightAuto` no longer contains two
   separate attributes contributing to relevance score, `relevance` and
@@ -37,7 +39,8 @@ Here's what did change in an incompatible way:
 Another technically compatible change that nonetheless might need attention:
 
 - The structure of the NPM package was refactored, so if you had installed it
-  locally, you'll have to update your paths. The usual `require('highlight.js')`
+  locally, you'll have to update your paths. The
+  usual `require('highlight.js')`
   works as before. This is contributed by [Dmitry Smolin][].
 
 New features:
@@ -45,7 +48,8 @@ New features:
 - Languages now can be recognized by multiple names like "js" for JavaScript or
   "html" for, well, HTML (which earlier insisted on calling it "xml"). These
   aliases can be specified in the class attribute of the code container in your
-  HTML as well as in various API calls. For now there are only a few very common
+  HTML as well as in various API calls. For now there are only a few very
+  common
   aliases but we'll expand it in the future. All of them are listed in the
   [class reference][].
 
@@ -74,7 +78,8 @@ Miscelleanous improvements:
 - [Jeremy Hull][] fixed a lot of styles for consistency.
 - Finally, highlighting PHP and HTML [mixed in peculiar ways][php-html].
 - Objective C and C# now properly highlight titles in method definition.
-- Big overhaul of relevance counting for a number of languages. Please do report
+- Big overhaul of relevance counting for a number of languages. Please do
+  report
   bugs about mis-detection of non-trivial code snippets!
 
 [cr]: http://highlightjs.readthedocs.org/en/latest/css-classes-reference.html
@@ -150,7 +155,8 @@ Improvements:
 ## New core developers
 
 The latest long period of almost complete inactivity in the project coincided
-with growing interest to it led to a decision that now seems completely obvious:
+with growing interest to it led to a decision that now seems completely
+obvious:
 we need more core developers.
 
 So without further ado let me welcome to the core team two long-time
@@ -242,7 +248,8 @@ Other notable changes:
 ## Version 7.3
 
 - Since this version highlight.js no longer works in IE version 8 and older.
-  It's made it possible to reduce the library size and dramatically improve code
+  It's made it possible to reduce the library size and dramatically improve
+  code
   readability and made it easier to maintain. Time to go forward!
 
 - New languages: AppleScript (by [Nathan Grigg][ng] and [Dr. Drang][dd]) and
@@ -257,7 +264,8 @@ Other notable changes:
     - big Ruby syntax update (by [Vasily Polovnyov][vast])
     - small fixes in Bash
 
-- Also Oleg Efimov did a great job of moving all the docs for language and style
+- Also Oleg Efimov did a great job of moving all the docs for language and
+  style
   developers and contributors from the old wiki under the source code in the
   "docs" directory. Now these docs are nicely presented at
   <http://highlightjs.readthedocs.org/>.
@@ -290,7 +298,8 @@ A Summer crop:
   [project by Chris Kempson][tm0].
 - Thanks to [Casey Duncun][cd] the library can now be built in the popular
   [AMD format][amd].
-- And last but not least, we've got a fair number of correctness and consistency
+- And last but not least, we've got a fair number of correctness and
+  consistency
   fixes, including a pretty significant refactoring of Ruby.
 
 [mf]: https://github.com/mfornos
@@ -305,7 +314,8 @@ A Summer crop:
 
 ## Version 7.0
 
-The reason for the new major version update is a global change of keyword syntax
+The reason for the new major version update is a global change of keyword
+syntax
 which resulted in the library getting smaller once again. For example, the
 hosted build is 2K less than at the previous version while supporting two new
 languages.
@@ -313,7 +323,8 @@ languages.
 Notable changes:
 
 - The library now works not only in a browser but also with [node.js][]. It is
-  installable with `npm install highlight.js`. [API][] docs are available on our
+  installable with `npm install highlight.js`. [API][] docs are available on
+  our
   wiki.
 
 - The new unique feature (apparently) among syntax highlighters is highlighting
@@ -327,7 +338,8 @@ Notable changes:
 - Three new languages: *D* by [Aleksandar Ružičić][ar], *R* by [Joe Cheng][jc]
   and *GLSL* by [Sergey Tikhomirov][st].
 
-- *Nginx* syntax has become a million times smaller and more universal thanks to
+- *Nginx* syntax has become a million times smaller and more universal thanks
+  to
   remaking it in a more generic manner that doesn't require listing all the
   directives in the known universe.
 
@@ -364,7 +376,8 @@ Overall highlight.js currently supports 51 languages and 20 style themes.
 ## Version 6.2
 
 A lot of things happened in highlight.js since the last version! We've got nine
-new contributors, the discussion group came alive, and the main branch on GitHub
+new contributors, the discussion group came alive, and the main branch on
+GitHub
 now counts more than 350 followers. Here are most significant results coming
 from all this activity:
 
@@ -444,10 +457,12 @@ New languages are:
 
 [steplg]: https://github.com/steplg
 
-Also this version is marginally faster and fixes a number of small long-standing
+Also this version is marginally faster and fixes a number of small
+long-standing
 bugs.
 
-Developer overview of the new language syntax is available in a [blog post about
+Developer overview of the new language syntax is available in
+a [blog post about
 recent beta release][beta].
 
 [beta]: http://softwaremaniacs.org/blog/2011/04/25/highlight-js-60-beta/en/
@@ -468,12 +483,14 @@ relevance.
 ## Version 5.13
 
 Past weekend began with a couple of simple additions for existing languages but
-ended up in a big code refactoring bringing along nice improvements for language
+ended up in a big code refactoring bringing along nice improvements for
+language
 developers.
 
 ### For users
 
-- Description of C++ has got new keywords from the upcoming [C++ 0x][] standard.
+- Description of C++ has got new keywords from the upcoming [C++ 0x][]
+  standard.
 - Description of HTML has got new tags from [HTML 5][].
 - CSS-styles have been unified to use consistent padding and also have lost
   pop-outs with names of detected languages.
@@ -517,7 +534,8 @@ expected one. Test summary is displayed right above all language snippets.
 
 ## CDN
 
-Fine people at [Yandex][] agreed to host highlight.js on their big fast servers.
+Fine people at [Yandex][] agreed to host highlight.js on their big fast
+servers.
 [Link up][l]!
 
 [yandex]: http://yandex.com/
@@ -582,7 +600,8 @@ Fixed escaping of quotes in VBScript strings.
 
 ## Version 5.5
 
-This version brings a small change: now .ini-files allow digits, underscores and
+This version brings a small change: now .ini-files allow digits, underscores
+and
 square brackets in key names.
 
 ## Version 5.4
@@ -617,7 +636,8 @@ Also in this version:
 
 ## Version 5.2
 
-- at last it's possible to replace indentation TABs with something sensible (e.g. 2 or 4 spaces)
+- at last it's possible to replace indentation TABs with something sensible (
+  e.g. 2 or 4 spaces)
 - new keywords and built-ins for 1C by Sergey Baranov
 - a couple of small fixes to Apache highlighting
 
@@ -645,7 +665,8 @@ contributions!
 ## Version 5.0
 
 The main change in the new major version of highlight.js is a mechanism for
-packing several languages along with the library itself into a single compressed
+packing several languages along with the library itself into a single
+compressed
 file. Now sites using several languages will load considerably faster because
 the library won't dynamically include additional files while loading.
 
@@ -740,7 +761,8 @@ Invisible new features:
   function for backward compatibility.
 - Performance is further increased by about 15%.
 
-Changing of a major version number caused by a new format of language definition
+Changing of a major version number caused by a new format of language
+definition
 files. If you use some third-party language files they should be updated.
 
 ## Version 3.5
@@ -842,7 +864,8 @@ submit form.
 
 ## Version 2.3
 
-This version fixes IE breakage in previous version. My apologies to all who have
+This version fixes IE breakage in previous version. My apologies to all who
+have
 already downloaded that one!
 
 ## Version 2.2

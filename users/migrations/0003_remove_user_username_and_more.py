@@ -6,7 +6,8 @@ from django.db import models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('users', '0002_user_additional_information_user_address_user_city_and_more'),
+        ('users',
+         '0002_user_additional_information_user_address_user_city_and_more'),
     ]
 
     operations = [
@@ -17,7 +18,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='user',
             name='additional_information',
-            field=models.CharField(blank=True, default=None, max_length=300, null=True,
+            field=models.CharField(blank=True, default=None, max_length=300,
+                                   null=True,
                                    verbose_name='Додаткова інформація для доставки'),
         ),
     ]

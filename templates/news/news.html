@@ -9,17 +9,21 @@
 {% for item in news %}
 <div class="card mb-3">
     <div class="card-header">
-        {% trans 'КАТЕГОРІЯ:'|upper %} <a href="{{item.category.get_absolute_url}}"> {{ item.category|upper }}</a>
+        {% trans 'КАТЕГОРІЯ:'|upper %} <a
+            href="{{item.category.get_absolute_url}}"> {{ item.category|upper }}</a>
     </div>
     <div class="card-body">
         <div class="media">
             {% if item.photo %}
-            <img src="{{ item.photo.url }}" alt="" width="350" class="mr-3">
+            <img alt="" class="mr-3" src="{{ item.photo.url }}" width="350">
             {% endif %}
             <div class="media-body">
-                <a href="{{item.get_absolute_url}}"><h5 class="card-title">{{ item.title|truncatewords:10 | safe}}</h5></a>
-                <p class="card-text">{{ item.content|truncatewords:40| safe }}</p>
-                <a href="{{ item.get_absolute_url }}" class="btn btn-primary">{% trans 'Читати далі...' %}</a>
+                <a href="{{item.get_absolute_url}}"><h5 class="card-title">
+                    {{ item.title|truncatewords:10 | safe}}</h5></a>
+                <p class="card-text">
+                    {{ item.content|truncatewords:40| safe }}</p>
+                <a class="btn btn-primary" href="{{ item.get_absolute_url }}">
+                    {% trans 'Читати далі' %}...</a>
             </div>
         </div>
         <div class="card-footer text-muted">

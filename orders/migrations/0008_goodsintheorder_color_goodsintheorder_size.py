@@ -15,13 +15,15 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='goodsintheorder',
             name='color',
-            field=models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.SET_NULL,
+            field=models.ForeignKey(blank=True, default=None, null=True,
+                                    on_delete=django.db.models.deletion.SET_NULL,
                                     to='shop.attributecolor'),
         ),
         migrations.AddField(
             model_name='goodsintheorder',
             name='size',
-            field=models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.SET_NULL,
+            field=models.ForeignKey(blank=True, default=None, null=True,
+                                    on_delete=django.db.models.deletion.SET_NULL,
                                     to='shop.attributesize'),
         ),
     ]

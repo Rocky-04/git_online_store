@@ -37,7 +37,8 @@ def show_carousel_banner(pk_banner):
 
 @register.inclusion_tag('shop/inc/carousel_brand.html')
 def show_carousel_brand():
-    brand = Manufacturer.objects.annotate(cnt=Count('picture')).filter(cnt__gt=0)
+    brand = Manufacturer.objects.annotate(cnt=Count('picture')).filter(
+        cnt__gt=0)
     return {'brand': brand}
 
 

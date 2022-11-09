@@ -1,7 +1,8 @@
 @bender-tags: exportpdf, feature, 77
 @bender-ui: collapsed
 @bender-include: ../_helpers/tools.js
-@bender-ckeditor-plugins: wysiwygarea, toolbar, basicstyles, notification, format
+@bender-ckeditor-plugins: wysiwygarea, toolbar, basicstyles, notification,
+format
 
 Note: You need the Internet connection to run this test.
 
@@ -16,4 +17,5 @@ Note: You need the Internet connection to run this test.
 
 **Expected:** No information about being created with CKEditor was added.
 
-**Unexpected:** There is an additional note about CKEditor at the bottom of page.
+**Unexpected:** There is an additional note about CKEditor at the bottom of
+page.

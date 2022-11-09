@@ -6,7 +6,6 @@ from django.db import models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('news', '0001_initial'),
     ]
@@ -50,6 +49,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='news',
             name='category',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.PROTECT, related_name='news', to='news.category'),
+            field=models.ForeignKey(null=True,
+                                    on_delete=django.db.models.deletion.PROTECT,
+                                    related_name='news', to='news.category'),
         ),
     ]

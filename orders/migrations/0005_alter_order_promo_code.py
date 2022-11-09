@@ -14,7 +14,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='order',
             name='promo_code',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL,
+            field=models.ForeignKey(blank=True, null=True,
+                                    on_delete=django.db.models.deletion.SET_NULL,
                                     to='orders.promocode'),
         ),
     ]

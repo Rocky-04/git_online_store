@@ -15,8 +15,11 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Category',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(db_index=True, max_length=100, verbose_name='Категория')),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True,
+                                           serialize=False,
+                                           verbose_name='ID')),
+                ('title', models.CharField(db_index=True, max_length=100,
+                                           verbose_name='Категория')),
                 ('slug', models.SlugField(blank=True, unique=True)),
             ],
             options={
@@ -28,16 +31,21 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='News',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True,
+                                           serialize=False,
+                                           verbose_name='ID')),
                 ('title', models.CharField(max_length=100)),
                 ('content', models.TextField(blank=True, default=None)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
-                ('photo', models.ImageField(blank=True, upload_to='photo/%Y/%m/%d/')),
+                ('photo',
+                 models.ImageField(blank=True, upload_to='photo/%Y/%m/%d/')),
                 ('is_published', models.BooleanField(default=True)),
                 ('slug', models.SlugField(blank=True, unique=True)),
                 ('category',
-                 models.ForeignKey(null=True, on_delete=django.db.models.deletion.PROTECT, to='news.category')),
+                 models.ForeignKey(null=True,
+                                   on_delete=django.db.models.deletion.PROTECT,
+                                   to='news.category')),
             ],
             options={
                 'verbose_name': 'News',

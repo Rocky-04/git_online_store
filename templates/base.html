@@ -25,15 +25,18 @@
     <link href="{% static 'img/icon.ico' %}" rel="icon">
 
     <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+          rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+          rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
     <link href="{% static 'lib/animate/animate.min.css" rel="stylesheet' %}">
-    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}"
+          rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
@@ -47,23 +50,24 @@
 {% if messages %}
 {% for message in messages %}
 {% if message.tags == 'error' %}
-    <div class="alert alert-danger" role="alert">
-     {{message}}
-         {% else %}
+<div class="alert alert-danger" role="alert">
+    {{message}}
+    {% else %}
     <div class="alert alert-{{message.tags}}" role="alert">
-         {{message}}
+        {{message}}
     </div>
-     {% endif %}
-     {% endfor %}
-        </div>
-     {% endif %}
+    {% endif %}
+    {% endfor %}
+</div>
+{% endif %}
 
-     {% block content %}{% endblock %}
+{% block content %}{% endblock %}
 
-     {% include 'inc/_footer.html' %}
+{% include 'inc/_footer.html' %}
 
 <!-- Back to Top -->
-<a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+<a class="btn btn-primary back-to-top" href="#"><i
+        class="fa fa-angle-double-up"></i></a>
 
 
 <!-- JavaScript Libraries -->

@@ -28,12 +28,14 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='color',
             name='value_en',
-            field=models.CharField(blank=True, default=None, max_length=15, null=True),
+            field=models.CharField(blank=True, default=None, max_length=15,
+                                   null=True),
         ),
         migrations.AddField(
             model_name='color',
             name='value_uk',
-            field=models.CharField(blank=True, default=None, max_length=15, null=True),
+            field=models.CharField(blank=True, default=None, max_length=15,
+                                   null=True),
         ),
         migrations.AddField(
             model_name='country',

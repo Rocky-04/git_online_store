@@ -6,26 +6,31 @@ from django.db import models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('shop', '0003_tag_description_en_tag_description_uk_tag_title_en_and_more'),
+        ('shop',
+         '0003_tag_description_en_tag_description_uk_tag_title_en_and_more'),
     ]
 
     operations = [
         migrations.AlterModelOptions(
             name='category',
-            options={'verbose_name': 'Category', 'verbose_name_plural': 'Categories'},
+            options={'verbose_name': 'Category',
+                     'verbose_name_plural': 'Categories'},
         ),
         migrations.AlterModelOptions(
             name='country',
-            options={'ordering': ['title'], 'verbose_name': 'Country', 'verbose_name_plural': 'Countries'},
+            options={'ordering': ['title'], 'verbose_name': 'Country',
+                     'verbose_name_plural': 'Countries'},
         ),
         migrations.AlterModelOptions(
             name='tag',
-            options={'ordering': ['title'], 'verbose_name': 'Tag', 'verbose_name_plural': 'Tags'},
+            options={'ordering': ['title'], 'verbose_name': 'Tag',
+                     'verbose_name_plural': 'Tags'},
         ),
         migrations.AlterField(
             model_name='category',
             name='picture',
-            field=models.ImageField(blank=True, null=True, upload_to='photo/%Y/%m/%d/'),
+            field=models.ImageField(blank=True, null=True,
+                                    upload_to='photo/%Y/%m/%d/'),
         ),
         migrations.AlterField(
             model_name='category',
@@ -50,7 +55,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='product',
             name='price',
-            field=models.DecimalField(decimal_places=0, default=0, max_digits=10),
+            field=models.DecimalField(decimal_places=0, default=0,
+                                      max_digits=10),
         ),
         migrations.AlterField(
             model_name='product',
@@ -80,7 +86,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='tag',
             name='picture',
-            field=models.ImageField(blank=True, null=True, upload_to='photo/%Y/%m/%d/', verbose_name='Photo'),
+            field=models.ImageField(blank=True, null=True,
+                                    upload_to='photo/%Y/%m/%d/',
+                                    verbose_name='Photo'),
         ),
         migrations.AlterField(
             model_name='tag',

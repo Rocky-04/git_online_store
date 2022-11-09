@@ -9,12 +9,18 @@ class User(AbstractUser):
         _('email address'),
         unique=True,
     )
-    city = models.CharField(max_length=200, blank=True, default=None, null=True)
-    phone_number = models.CharField(max_length=200, blank=True, default=None, null=True)
-    address = models.CharField(max_length=200, blank=True, default=None, null=True)
-    postcode = models.CharField(max_length=200, blank=True, default=None, null=True)
-    additional_information = models.CharField(max_length=300, blank=True, default=None, null=True)
-    birthday = models.DateField(auto_now=False, auto_now_add=False, blank=True, default=None, null=True)
+    city = models.CharField(max_length=200, blank=True, default=None,
+                            null=True)
+    phone_number = models.CharField(max_length=200, blank=True, default=None,
+                                    null=True)
+    address = models.CharField(max_length=200, blank=True, default=None,
+                               null=True)
+    postcode = models.CharField(max_length=200, blank=True, default=None,
+                                null=True)
+    additional_information = models.CharField(max_length=300, blank=True,
+                                              default=None, null=True)
+    birthday = models.DateField(auto_now=False, auto_now_add=False, blank=True,
+                                default=None, null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

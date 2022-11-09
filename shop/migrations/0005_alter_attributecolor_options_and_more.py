@@ -14,7 +14,8 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='attributecolor',
-            options={'verbose_name': 'AttributeColor', 'verbose_name_plural': 'AttributeColors'},
+            options={'verbose_name': 'AttributeColor',
+                     'verbose_name_plural': 'AttributeColors'},
         ),
         migrations.AlterModelOptions(
             name='attributecolorimage',
@@ -22,11 +23,13 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterModelOptions(
             name='attributesize',
-            options={'verbose_name': 'AttributeSize', 'verbose_name_plural': 'AttributeSizes'},
+            options={'verbose_name': 'AttributeSize',
+                     'verbose_name_plural': 'AttributeSizes'},
         ),
         migrations.AlterModelOptions(
             name='banner',
-            options={'ordering': ['pk'], 'verbose_name': 'Banner', 'verbose_name_plural': 'Banners'},
+            options={'ordering': ['pk'], 'verbose_name': 'Banner',
+                     'verbose_name_plural': 'Banners'},
         ),
         migrations.AlterModelOptions(
             name='color',
@@ -34,19 +37,23 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterModelOptions(
             name='currency',
-            options={'ordering': ['title'], 'verbose_name': 'Currency', 'verbose_name_plural': 'Currencies'},
+            options={'ordering': ['title'], 'verbose_name': 'Currency',
+                     'verbose_name_plural': 'Currencies'},
         ),
         migrations.AlterModelOptions(
             name='delivery',
-            options={'ordering': ['price'], 'verbose_name': 'shipping cost', 'verbose_name_plural': 'cost of delivery'},
+            options={'ordering': ['price'], 'verbose_name': 'shipping cost',
+                     'verbose_name_plural': 'cost of delivery'},
         ),
         migrations.AlterModelOptions(
             name='manufacturer',
-            options={'ordering': ['title'], 'verbose_name': 'brand', 'verbose_name_plural': 'brands'},
+            options={'ordering': ['title'], 'verbose_name': 'brand',
+                     'verbose_name_plural': 'brands'},
         ),
         migrations.AlterModelOptions(
             name='product',
-            options={'ordering': ['-available', '-count_sale', '-created_at', 'price'], 'verbose_name': 'Product',
+            options={'ordering': ['-available', '-count_sale', '-created_at',
+                                  'price'], 'verbose_name': 'Product',
                      'verbose_name_plural': 'Products'},
         ),
         migrations.AlterModelOptions(
@@ -55,7 +62,8 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterModelOptions(
             name='status',
-            options={'verbose_name': 'Status', 'verbose_name_plural': 'Statuses'},
+            options={'verbose_name': 'Status',
+                     'verbose_name_plural': 'Statuses'},
         ),
         migrations.AlterField(
             model_name='attributecolor',
@@ -100,7 +108,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='manufacturer',
             name='picture',
-            field=models.ImageField(blank=True, null=True, upload_to='photo/%Y/%m/%d/'),
+            field=models.ImageField(blank=True, null=True,
+                                    upload_to='photo/%Y/%m/%d/'),
         ),
         migrations.AlterField(
             model_name='manufacturer',
@@ -115,7 +124,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='product',
             name='category',
-            field=mptt.fields.TreeForeignKey(null=True, on_delete=django.db.models.deletion.PROTECT,
+            field=mptt.fields.TreeForeignKey(null=True,
+                                             on_delete=django.db.models.deletion.PROTECT,
                                              to='shop.category'),
         ),
         migrations.AlterField(
@@ -126,7 +136,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='product',
             name='country',
-            field=models.ForeignKey(blank=True, default=1, null=True, on_delete=django.db.models.deletion.SET_NULL,
+            field=models.ForeignKey(blank=True, default=1, null=True,
+                                    on_delete=django.db.models.deletion.SET_NULL,
                                     to='shop.country'),
         ),
         migrations.AlterField(
@@ -137,7 +148,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='product',
             name='currency',
-            field=models.ForeignKey(default=1, null=True, on_delete=django.db.models.deletion.SET_NULL,
+            field=models.ForeignKey(default=1, null=True,
+                                    on_delete=django.db.models.deletion.SET_NULL,
                                     to='shop.currency'),
         ),
         migrations.AlterField(
@@ -148,13 +160,16 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='product',
             name='discount',
-            field=models.DecimalField(decimal_places=0, default=0, max_digits=10),
+            field=models.DecimalField(decimal_places=0, default=0,
+                                      max_digits=10),
         ),
         migrations.AlterField(
             model_name='product',
             name='manufacturer',
-            field=models.ForeignKey(blank=True, default=1, null=True, on_delete=django.db.models.deletion.SET_NULL,
-                                    related_name='manufacturer', to='shop.manufacturer'),
+            field=models.ForeignKey(blank=True, default=1, null=True,
+                                    on_delete=django.db.models.deletion.SET_NULL,
+                                    related_name='manufacturer',
+                                    to='shop.manufacturer'),
         ),
         migrations.AlterField(
             model_name='product',

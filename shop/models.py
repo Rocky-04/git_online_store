@@ -12,9 +12,12 @@ from users.models import User
 
 class Category(MPTTModel, models.Model):
     title = models.CharField(max_length=50, unique=True)
-    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
-    slug = models.SlugField(max_length=50, blank=True, unique=True, db_index=True)
-    picture = models.ImageField(upload_to='photo/%Y/%m/%d/', null=True, blank=True)
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True,
+                            blank=True, related_name='children')
+    slug = models.SlugField(max_length=50, blank=True, unique=True,
+                            db_index=True)
+    picture = models.ImageField(upload_to='photo/%Y/%m/%d/', null=True,
+                                blank=True)
 
     def __str__(self):
         return self.title
@@ -24,14 +27,15 @@ class Category(MPTTModel, models.Model):
 
     def get_count_product_in_category(self):
         """
-        Return count(int) product of nested categories
+        Returns count(int) product of nested categories
         """
         list_categories_pk = self.get_list_nested_categories()
-        return Product.objects.filter(category_id__in=list_categories_pk).count()
+        return Product.objects.filter(
+            category_id__in=list_categories_pk).count()
 
     def get_list_nested_categories(self):
         """
-        Return list of pk categories
+        Returns list of pk categories
         """
         list_categories_pk = [self.pk]
 
@@ -58,7 +62,8 @@ class Tag(models.Model):
     slug = models.SlugField(max_length=50, blank=True, db_index=True)
     description = models.TextField(blank=True, default=None)
     is_active = models.BooleanField(default=True, blank=True)
-    picture = models.ImageField(upload_to='photo/%Y/%m/%d/', verbose_name="Photo", null=True, blank=True)
+    picture = models.ImageField(upload_to='photo/%Y/%m/%d/',
+                                verbose_name="Photo", null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -74,7 +79,8 @@ class Tag(models.Model):
 
 class Country(models.Model):
     title = models.CharField(max_length=100, unique=True)
-    slug = models.SlugField(max_length=50, unique=True, blank=True, db_index=True)
+    slug = models.SlugField(max_length=50, unique=True, blank=True,
+                            db_index=True)
 
     def __str__(self):
         return self.title
@@ -87,8 +93,10 @@ class Country(models.Model):
 
 class Manufacturer(models.Model):
     title = models.CharField(max_length=100, unique=True)
-    slug = models.SlugField(max_length=50, unique=True, blank=True, db_index=True)
-    picture = models.ImageField(upload_to='photo/%Y/%m/%d/', null=True, blank=True)
+    slug = models.SlugField(max_length=50, unique=True, blank=True,
+                            db_index=True)
+    picture = models.ImageField(upload_to='photo/%Y/%m/%d/', null=True,
+                                blank=True)
 
     def __str__(self):
         return self.title
@@ -104,7 +112,8 @@ class Manufacturer(models.Model):
 
 class Product(models.Model):
     title = models.CharField(max_length=200, blank=True)
-    slug = models.SlugField(max_length=50, unique=True, blank=True, db_index=True)
+    slug = models.SlugField(max_length=50, unique=True, blank=True,
+                            db_index=True)
     available = models.BooleanField(default=True)
     price = models.DecimalField(max_digits=10, decimal_places=0, default=0)
     discount = models.DecimalField(max_digits=10, decimal_places=0, default=0)
@@ -115,10 +124,13 @@ class Product(models.Model):
     global_id = models.CharField(max_length=50, blank=True)
     count_sale = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
-    currency = models.ForeignKey('Currency', on_delete=models.SET_NULL, default=1, null=True)
+    currency = models.ForeignKey('Currency', on_delete=models.SET_NULL,
+                                 default=1, null=True)
     category = TreeForeignKey(Category, on_delete=models.PROTECT, null=True)
-    country = models.ForeignKey('Country', on_delete=models.SET_NULL, null=True, default=1, blank=True)
-    manufacturer = models.ForeignKey('Manufacturer', on_delete=models.SET_NULL, null=True, default=1,
+    country = models.ForeignKey('Country', on_delete=models.SET_NULL,
+                                null=True, default=1, blank=True)
+    manufacturer = models.ForeignKey('Manufacturer', on_delete=models.SET_NULL,
+                                     null=True, default=1,
                                      related_name='manufacturer', blank=True)
     tags = models.ManyToManyField(Tag, blank=True, related_name='products')
     rating = models.DecimalField(max_digits=10, decimal_places=0, default=5)
@@ -136,7 +148,8 @@ class Product(models.Model):
         return reverse_lazy('detail', kwargs={'slug': self.slug})
 
     def get_title_photo(self):
-        images = AttributeColorImage.objects.filter(product__product=self, product__available=True)
+        images = AttributeColorImage.objects.filter(product__product=self,
+                                                    product__available=True)
         if images:
             return images[0].images.url
         images = AttributeColorImage.objects.filter(product__product=self)
@@ -172,7 +185,8 @@ class Product(models.Model):
 
 
 class Color(models.Model):
-    value = models.CharField(max_length=15, blank=True, default=None, null=True)
+    value = models.CharField(max_length=15, blank=True, default=None,
+                             null=True)
 
     def __str__(self):
         return self.value
@@ -183,8 +197,10 @@ class Color(models.Model):
 
 
 class AttributeColor(models.Model):
-    product = models.ForeignKey('Product', related_name="attribute_color", on_delete=models.CASCADE)
-    color = models.ForeignKey('Color', on_delete=models.CASCADE, related_name="color", blank=True, default=None,
+    product = models.ForeignKey('Product', related_name="attribute_color",
+                                on_delete=models.CASCADE)
+    color = models.ForeignKey('Color', on_delete=models.CASCADE,
+                              related_name="color", blank=True, default=None,
                               null=True)
     available = models.BooleanField(default=True)
 
@@ -225,7 +241,8 @@ class AttributeColor(models.Model):
 
 
 class Size(models.Model):
-    value = models.CharField(max_length=15, blank=True, default=None, null=True)
+    value = models.CharField(max_length=15, blank=True, default=None,
+                             null=True)
 
     def __str__(self):
         return self.value
@@ -236,8 +253,12 @@ class Size(models.Model):
 
 
 class AttributeSize(models.Model):
-    product = models.ForeignKey('AttributeColor', related_name="attribute_size", on_delete=models.CASCADE)
-    size = models.ForeignKey('Size', on_delete=models.CASCADE, related_name="size", blank=True, default=None, null=True)
+    product = models.ForeignKey('AttributeColor',
+                                related_name="attribute_size",
+                                on_delete=models.CASCADE)
+    size = models.ForeignKey('Size', on_delete=models.CASCADE,
+                             related_name="size", blank=True, default=None,
+                             null=True)
     available = models.BooleanField(default=True)
 
     def __str__(self):
@@ -261,7 +282,8 @@ class AttributeSize(models.Model):
 
 
 class AttributeColorImage(models.Model):
-    product = models.ForeignKey(AttributeColor, default=None, on_delete=models.CASCADE)
+    product = models.ForeignKey(AttributeColor, default=None,
+                                on_delete=models.CASCADE)
     images = models.FileField(upload_to='images/%Y/%m/%d/')
 
     class Meta:
@@ -321,8 +343,10 @@ class Reviews(models.Model):
                (3, _('Нормально')),
                (4, _('Добре')),
                (5, _('Дуже добре'))]
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='rewiews')
+    user = models.ForeignKey(User, on_delete=models.CASCADE,
+                             related_name='reviews')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,
+                                related_name='rewiews')
     text = models.TextField(max_length=200)
     rating = models.IntegerField(blank=True, choices=RATINGS)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
@@ -334,7 +358,9 @@ class Reviews(models.Model):
 
 def rating_in_product_post_save(sender, instance, created=None, **kwargs):
     product = instance.product
-    reviews = Reviews.objects.filter(product=product).aggregate(Avg('rating'), Count('rating'))
+    reviews = Reviews.objects.filter(product=product).aggregate(Avg('rating'),
+                                                                Count(
+                                                                    'rating'))
     rating = reviews['rating__avg']
     count_rewiews = reviews['rating__count']
     instance.product.rating = rating

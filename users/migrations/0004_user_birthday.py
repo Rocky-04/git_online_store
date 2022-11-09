@@ -13,6 +13,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='user',
             name='birthday',
-            field=models.DateField(blank=True, default=None, null=True, verbose_name='Дата народження'),
+            field=models.DateField(blank=True, default=None, null=True,
+                                   verbose_name='Дата народження'),
         ),
     ]

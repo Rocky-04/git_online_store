@@ -24,10 +24,13 @@ class FavoriteAddView(View):
         current = request.POST.get('current')
 
         try:
-            Favorite.objects.get_or_create(session_key=session_key, product_id=product_id,
-                                           is_active=True, size_id=size, color_id=color)
+            Favorite.objects.get_or_create(session_key=session_key,
+                                           product_id=product_id,
+                                           is_active=True, size_id=size,
+                                           color_id=color)
         except ValueError as err:
-            return JsonResponse({'success': False, 'error': str(err)}, status=400)
+            return JsonResponse({'success': False, 'error': str(err)},
+                                status=400)
         return HttpResponseRedirect(current)
 
 
@@ -49,10 +52,13 @@ class FavoriteRemoveView(View):
         current = request.POST.get('current')
 
         try:
-            Favorite.objects.filter(session_key=session_key, product_id=product_id,
-                                    is_active=True, size_id=size, color_id=color).delete()
+            Favorite.objects.filter(session_key=session_key,
+                                    product_id=product_id,
+                                    is_active=True, size_id=size,
+                                    color_id=color).delete()
         except ValueError as err:
-            return JsonResponse({'success': False, 'error': str(err)}, status=400)
+            return JsonResponse({'success': False, 'error': str(err)},
+                                status=400)
         return HttpResponseRedirect(current)
 
 

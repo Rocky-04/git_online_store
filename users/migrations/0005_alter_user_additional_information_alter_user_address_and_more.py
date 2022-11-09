@@ -13,12 +13,14 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='user',
             name='additional_information',
-            field=models.CharField(blank=True, default=None, max_length=300, null=True),
+            field=models.CharField(blank=True, default=None, max_length=300,
+                                   null=True),
         ),
         migrations.AlterField(
             model_name='user',
             name='address',
-            field=models.CharField(blank=True, default=None, max_length=200, null=True),
+            field=models.CharField(blank=True, default=None, max_length=200,
+                                   null=True),
         ),
         migrations.AlterField(
             model_name='user',
@@ -28,16 +30,19 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='user',
             name='city',
-            field=models.CharField(blank=True, default=None, max_length=200, null=True),
+            field=models.CharField(blank=True, default=None, max_length=200,
+                                   null=True),
         ),
         migrations.AlterField(
             model_name='user',
             name='phone_number',
-            field=models.CharField(blank=True, default=None, max_length=200, null=True),
+            field=models.CharField(blank=True, default=None, max_length=200,
+                                   null=True),
         ),
         migrations.AlterField(
             model_name='user',
             name='postcode',
-            field=models.CharField(blank=True, default=None, max_length=200, null=True),
+            field=models.CharField(blank=True, default=None, max_length=200,
+                                   null=True),
         ),
     ]

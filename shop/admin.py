@@ -57,7 +57,8 @@ class ProductAdminLevel(NestedModelAdmin, TranslationAdmin):
 
     prepopulated_fields = {'slug': ('title',)}
     list_display = (
-        'id', 'title', 'price', 'price_now', 'discount', 'count_sale', 'available', 'manufacturer', 'created_at',
+        'id', 'title', 'price', 'price_now', 'discount', 'count_sale',
+        'available', 'manufacturer', 'created_at',
         'category')
     list_display_links = ('id', 'title')
     exclude = ("available",)

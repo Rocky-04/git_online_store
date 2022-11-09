@@ -20,7 +20,8 @@ class ProductInOrderInline(admin.StackedInline):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['id', 'first_name', 'last_name', 'email', 'city', 'phone_number', 'updated', 'total_price',
+    list_display = ['id', 'first_name', 'last_name', 'email', 'city',
+                    'phone_number', 'updated', 'total_price',
                     'payment_method']
     inlines = [ProductInOrderInline]
 

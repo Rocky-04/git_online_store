@@ -6,11 +6,13 @@
 <h1>{{ item.title }}</h1>
 <div class="card mb-3">
     <div class="card-header">
-        {% trans 'КАТЕГОРІЯ:' %} <a href="{{item.category.get_absolute_url}}"> {{ item.category }}</a>
+        {% trans 'КАТЕГОРІЯ:' %} <a href="{{item.category.get_absolute_url}}">
+        {{ item.category }}</a>
     </div>
     <div class="card-body">
         {% if item.photo %}
-        <img src="{{ item.photo.url }}" alt="" width="350" class="float-left mr-3">
+        <img alt="" class="float-left mr-3" src="{{ item.photo.url }}"
+             width="350">
         {% endif %}
         <br>
         <h5 class="card-title">{{ item.title }}</h5>

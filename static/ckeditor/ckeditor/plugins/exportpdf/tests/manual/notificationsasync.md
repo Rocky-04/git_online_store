@@ -3,7 +3,8 @@
 @bender-include: ../_helpers/tools.js
 @bender-ckeditor-plugins: wysiwygarea, toolbar, basicstyles, notification
 
-1. Click `Export to PDF` button (the one next to the `Source` button) in the first editor.
+1. Click `Export to PDF` button (the one next to the `Source` button) in the
+   first editor.
 1. Watch appearing notifications.
 
 **Expected:**

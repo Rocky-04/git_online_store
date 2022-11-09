@@ -18,6 +18,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='product',
             name='rating',
-            field=models.DecimalField(decimal_places=0, default=5, max_digits=10),
+            field=models.DecimalField(decimal_places=0, default=5,
+                                      max_digits=10),
         ),
     ]

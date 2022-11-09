@@ -11,7 +11,8 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='attributecolor',
-            options={'verbose_name': 'Attribute color', 'verbose_name_plural': 'Attribute colors'},
+            options={'verbose_name': 'Attribute color',
+                     'verbose_name_plural': 'Attribute colors'},
         ),
         migrations.RemoveField(
             model_name='manufacturer',

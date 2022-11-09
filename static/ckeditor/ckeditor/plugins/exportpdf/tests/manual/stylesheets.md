@@ -4,7 +4,8 @@
 @bender-ckeditor-plugins: toolbar, basicstyles, notification
 
 **Note:** This test
-uses <a href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" target="_blank">Bootstrap
+uses <a href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" target="_blank">
+Bootstrap
 CDN</a>. If something goes wrong, check if the link works correctly first.
 
 1. Use `Export to PDF` button in the first editor.

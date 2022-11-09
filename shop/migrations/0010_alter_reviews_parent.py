@@ -14,7 +14,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='reviews',
             name='parent',
-            field=models.ForeignKey(blank=True, default=None, on_delete=django.db.models.deletion.CASCADE,
+            field=models.ForeignKey(blank=True, default=None,
+                                    on_delete=django.db.models.deletion.CASCADE,
                                     to='shop.reviews'),
         ),
     ]

@@ -13,27 +13,32 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='user',
             name='additional_information',
-            field=models.CharField(blank=True, default=None, max_length=200, null=True,
+            field=models.CharField(blank=True, default=None, max_length=200,
+                                   null=True,
                                    verbose_name='Додаткова інформація'),
         ),
         migrations.AddField(
             model_name='user',
             name='address',
-            field=models.CharField(blank=True, default=None, max_length=200, null=True, verbose_name='Адреса'),
+            field=models.CharField(blank=True, default=None, max_length=200,
+                                   null=True, verbose_name='Адреса'),
         ),
         migrations.AddField(
             model_name='user',
             name='city',
-            field=models.CharField(blank=True, default=None, max_length=200, null=True, verbose_name='Місто'),
+            field=models.CharField(blank=True, default=None, max_length=200,
+                                   null=True, verbose_name='Місто'),
         ),
         migrations.AddField(
             model_name='user',
             name='phone_number',
-            field=models.CharField(blank=True, default=None, max_length=200, null=True, verbose_name='Телефон'),
+            field=models.CharField(blank=True, default=None, max_length=200,
+                                   null=True, verbose_name='Телефон'),
         ),
         migrations.AddField(
             model_name='user',
             name='postcode',
-            field=models.CharField(blank=True, default=None, max_length=200, null=True, verbose_name='Індекс'),
+            field=models.CharField(blank=True, default=None, max_length=200,
+                                   null=True, verbose_name='Індекс'),
         ),
     ]

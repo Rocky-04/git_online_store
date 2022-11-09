@@ -5,7 +5,8 @@
 
 **Note:** At the beginning open the console.
 
-1. Click `Export to PDF` button (the one next to the `Source` button) in the first editor.
+1. Click `Export to PDF` button (the one next to the `Source` button) in the
+   first editor.
 1. Wait for the file to download.
 1. Open the file.
 

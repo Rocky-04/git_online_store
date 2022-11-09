@@ -15,9 +15,11 @@ def order_cost(context, button=False):
     else:
         session_key = request.session.session_key
 
-    products_in_basket = ProductInBasket.objects.filter(session_key=session_key, is_active=True)
+    products_in_basket = ProductInBasket.objects.filter(
+        session_key=session_key, is_active=True)
     if len(products_in_basket) > 0:
-        amount = ProductInBasket.objects.filter(session_key=session_key, size__available=True).aggregate(
+        amount = ProductInBasket.objects.filter(session_key=session_key,
+                                                size__available=True).aggregate(
             total=Sum('total_price'))
         amount = amount['total']
         delivery = Delivery.get_delivery(amount).price

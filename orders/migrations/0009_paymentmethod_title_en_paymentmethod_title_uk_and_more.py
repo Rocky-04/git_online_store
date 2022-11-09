@@ -5,7 +5,6 @@ from django.db import models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('orders', '0008_goodsintheorder_color_goodsintheorder_size'),
     ]
