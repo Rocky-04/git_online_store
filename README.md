@@ -1,6 +1,6 @@
 # What is it?
-### Git_online_store is an online shop based on Python and Django.
-### The online store has a shopping cart, reviews, a personal account, and two language interfaces.
+### The project has been moved:
+### https://github.com/Rocky-04/store
 
 # Demo shop
 ### A demo shop can be tried here:
