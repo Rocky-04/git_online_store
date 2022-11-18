@@ -11,13 +11,20 @@ from users.models import User
 
 
 class Category(MPTTModel, models.Model):
+    class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+
+    class MPTTMeta:
+        order_insertion_by = ['title']
+
     title = models.CharField(max_length=50, unique=True)
-    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True,
-                            blank=True, related_name='children')
     slug = models.SlugField(max_length=50, blank=True, unique=True,
                             db_index=True)
     picture = models.ImageField(upload_to='photo/%Y/%m/%d/', null=True,
                                 blank=True)
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True,
+                            blank=True, related_name='children')
 
     def __str__(self):
         return self.title
@@ -48,15 +55,13 @@ class Category(MPTTModel, models.Model):
 
         return list_categories_pk
 
-    class MPTTMeta:
-        order_insertion_by = ['title']
-
-    class Meta:
-        verbose_name = 'Category'
-        verbose_name_plural = 'Categories'
-
 
 class Tag(models.Model):
+    class Meta:
+        verbose_name = 'Tag'
+        verbose_name_plural = 'Tags'
+        ordering = ['title']
+
     title = models.CharField(max_length=50, unique=True)
     title_two = models.CharField(max_length=50, blank=True)
     slug = models.SlugField(max_length=50, blank=True, db_index=True)
@@ -71,13 +76,13 @@ class Tag(models.Model):
     def get_absolute_url(self):
         return reverse_lazy('tag', kwargs={'slug': self.slug})
 
-    class Meta:
-        verbose_name = 'Tag'
-        verbose_name_plural = 'Tags'
-        ordering = ['title']
-
 
 class Country(models.Model):
+    class Meta:
+        verbose_name = 'Country'
+        verbose_name_plural = 'Countries'
+        ordering = ['title']
+
     title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=50, unique=True, blank=True,
                             db_index=True)
@@ -85,13 +90,13 @@ class Country(models.Model):
     def __str__(self):
         return self.title
 
-    class Meta:
-        verbose_name = 'Country'
-        verbose_name_plural = 'Countries'
-        ordering = ['title']
-
 
 class Manufacturer(models.Model):
+    class Meta:
+        verbose_name = 'brand'
+        verbose_name_plural = 'brands'
+        ordering = ['title']
+
     title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=50, unique=True, blank=True,
                             db_index=True)
@@ -104,16 +109,15 @@ class Manufacturer(models.Model):
     def get_absolute_url(self):
         return reverse_lazy('brand', kwargs={'slug': self.slug})
 
-    class Meta:
-        verbose_name = 'brand'
-        verbose_name_plural = 'brands'
-        ordering = ['title']
-
 
 class Product(models.Model):
+    class Meta:
+        verbose_name = 'Product'
+        verbose_name_plural = 'Products'
+        ordering = ['-available', '-count_sale', '-created_at', 'price']
+
     title = models.CharField(max_length=200, blank=True)
-    slug = models.SlugField(max_length=50, unique=True, blank=True,
-                            db_index=True)
+    slug = models.SlugField(max_length=50, unique=True, blank=True, db_index=True)
     available = models.BooleanField(default=True)
     price = models.DecimalField(max_digits=10, decimal_places=0, default=0)
     discount = models.DecimalField(max_digits=10, decimal_places=0, default=0)
@@ -124,22 +128,15 @@ class Product(models.Model):
     global_id = models.CharField(max_length=50, blank=True)
     count_sale = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
-    currency = models.ForeignKey('Currency', on_delete=models.SET_NULL,
-                                 default=1, null=True)
+    currency = models.ForeignKey('Currency', on_delete=models.SET_NULL, default=1, null=True)
     category = TreeForeignKey(Category, on_delete=models.PROTECT, null=True)
-    country = models.ForeignKey('Country', on_delete=models.SET_NULL,
-                                null=True, default=1, blank=True)
-    manufacturer = models.ForeignKey('Manufacturer', on_delete=models.SET_NULL,
-                                     null=True, default=1,
-                                     related_name='manufacturer', blank=True)
+    country = models.ForeignKey('Country', on_delete=models.SET_NULL, null=True, default=1,
+                                blank=True)
+    manufacturer = models.ForeignKey('Manufacturer', on_delete=models.SET_NULL, null=True,
+                                     default=1, related_name='manufacturer', blank=True)
     tags = models.ManyToManyField(Tag, blank=True, related_name='products')
     rating = models.DecimalField(max_digits=10, decimal_places=0, default=5)
     counnt_reviews = models.IntegerField(default=0)
-
-    class Meta:
-        verbose_name = 'Product'
-        verbose_name_plural = 'Products'
-        ordering = ['-available', '-count_sale', '-created_at', 'price']
 
     def __str__(self):
         return self.title
@@ -185,18 +182,22 @@ class Product(models.Model):
 
 
 class Color(models.Model):
+    class Meta:
+        verbose_name = 'Color'
+        verbose_name_plural = 'Colors'
+
     value = models.CharField(max_length=15, blank=True, default=None,
                              null=True)
 
     def __str__(self):
         return self.value
 
-    class Meta:
-        verbose_name = 'Color'
-        verbose_name_plural = 'Colors'
-
 
 class AttributeColor(models.Model):
+    class Meta:
+        verbose_name = 'Attribute color'
+        verbose_name_plural = 'Attribute colors'
+
     product = models.ForeignKey('Product', related_name="attribute_color",
                                 on_delete=models.CASCADE)
     color = models.ForeignKey('Color', on_delete=models.CASCADE,
@@ -206,10 +207,6 @@ class AttributeColor(models.Model):
 
     def __str__(self):
         return str(self.product.title) + ' ' + str(self.color)
-
-    class Meta:
-        verbose_name = 'Attribute color'
-        verbose_name_plural = 'Attribute colors'
 
     def save(self, *args, **kwargs):
         if self.available is False and self.product.available is True:
@@ -241,18 +238,22 @@ class AttributeColor(models.Model):
 
 
 class Size(models.Model):
+    class Meta:
+        verbose_name = 'Size'
+        verbose_name_plural = 'Sizes'
+
     value = models.CharField(max_length=15, blank=True, default=None,
                              null=True)
 
     def __str__(self):
         return self.value
 
-    class Meta:
-        verbose_name = 'Size'
-        verbose_name_plural = 'Sizes'
-
 
 class AttributeSize(models.Model):
+    class Meta:
+        verbose_name = 'AttributeSize'
+        verbose_name_plural = 'AttributeSizes'
+
     product = models.ForeignKey('AttributeColor',
                                 related_name="attribute_size",
                                 on_delete=models.CASCADE)
@@ -263,10 +264,6 @@ class AttributeSize(models.Model):
 
     def __str__(self):
         return str(self.product) + ' ' + str(self.size)
-
-    class Meta:
-        verbose_name = 'AttributeSize'
-        verbose_name_plural = 'AttributeSizes'
 
     def save(self, *args, **kwargs):
         if self.available is False and self.product.available is True:
@@ -282,25 +279,25 @@ class AttributeSize(models.Model):
 
 
 class AttributeColorImage(models.Model):
-    product = models.ForeignKey(AttributeColor, default=None,
-                                on_delete=models.CASCADE)
-    images = models.FileField(upload_to='images/%Y/%m/%d/')
-
     class Meta:
         verbose_name = 'image'
         verbose_name_plural = 'images'
 
+    product = models.ForeignKey(AttributeColor, default=None,
+                                on_delete=models.CASCADE)
+    images = models.FileField(upload_to='images/%Y/%m/%d/')
+
 
 class Delivery(models.Model):
-    title = models.CharField(max_length=50)
-    price = models.IntegerField(default=0)
-    order_price = models.IntegerField(default=0, blank=True)
-    is_active = models.BooleanField(default=True, blank=True)
-
     class Meta:
         verbose_name = 'shipping cost'
         verbose_name_plural = 'cost of delivery'
         ordering = ['price']
+
+    title = models.CharField(max_length=50)
+    price = models.IntegerField(default=0)
+    order_price = models.IntegerField(default=0, blank=True)
+    is_active = models.BooleanField(default=True, blank=True)
 
     def __str__(self):
         return str(self.price)
@@ -315,13 +312,13 @@ class Delivery(models.Model):
 
 
 class Banner(models.Model):
-    title = models.CharField(max_length=50, unique=True)
-    tag = models.ForeignKey(Tag, blank=True, on_delete=models.CASCADE)
-
     class Meta:
         verbose_name = 'Banner'
         verbose_name_plural = 'Banners'
         ordering = ['pk']
+
+    title = models.CharField(max_length=50, unique=True)
+    tag = models.ForeignKey(Tag, blank=True, on_delete=models.CASCADE)
 
 
 class Currency(models.Model):
@@ -338,6 +335,9 @@ class Currency(models.Model):
 
 
 class Reviews(models.Model):
+    class Meta:
+        unique_together = ('user', 'product')
+
     RATINGS = [(1, _('Дуже погано')),
                (2, _('Погано')),
                (3, _('Нормально')),
@@ -351,9 +351,6 @@ class Reviews(models.Model):
     rating = models.IntegerField(blank=True, choices=RATINGS)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
-
-    class Meta:
-        unique_together = ('user', 'product')
 
 
 def rating_in_product_post_save(sender, instance, created=None, **kwargs):

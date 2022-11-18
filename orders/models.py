@@ -11,10 +11,8 @@ from users.models import User
 
 
 class Order(models.Model):
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True,
-                             null=True)
-    first_name = models.CharField(max_length=200, blank=True,
-                                  verbose_name=_('First name'))
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+    first_name = models.CharField(max_length=200, blank=True, verbose_name=_('First name'))
     last_name = models.CharField(max_length=200, blank=True)
     email = models.EmailField(blank=True)
     city = models.CharField(max_length=200, blank=True)

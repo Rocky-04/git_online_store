@@ -77,9 +77,8 @@ class AccountUserView(TemplateView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        orders = Order.objects.filter(Q(user=self.request.user) |
-                                      Q(email=self.request.user.email)).order_by(
-            '-id')
+        orders = Order.objects.filter(Q(user=self.request.user) | Q(
+            email=self.request.user.email)).order_by('-id')
 
         context['orders'] = orders
         context['title'] = _('Мої замовлення')

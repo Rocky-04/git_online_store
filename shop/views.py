@@ -44,12 +44,12 @@ class FilterView(ShopMixin):
             filter_manufacturer = Manufacturer.objects.all().values_list(
                 'manufacturer', flat=True)
 
-        queryset = Product.objects.filter(Q(pk__in=self.product_list_pk) &
-                                          Q(pk__in=filter_color) &
-                                          Q(pk__in=filter_size) &
-                                          Q(pk__in=filter_manufacturer) &
-                                          Q(price_now__gte=min_price,
-                                            price_now__lte=max_price))
+        queryset = Product.objects.filter(Q(pk__in=self.product_list_pk) & Q
+        (pk__in=filter_color) & Q
+                                          (pk__in=filter_size) & Q
+                                          (pk__in=filter_manufacturer) & Q
+                                          (price_now__gte=min_price,
+                                           price_now__lte=max_price))
 
         return queryset
 
@@ -161,8 +161,9 @@ class SendUserMailView(TemplateView):
 
         if name and email and subject and message:
             text_subject = f"contact form: {subject} {name}"
-            text_message = f"""You have received a new message from your website contact form.\n\n".
-            "Here are the details:\n\nName: {name}\n\n\nEmail: {email}\n\nSubject: {subject}\n\nMessage: {message}"""
+            text_message = f"You have received a new message from your website contact form.\n\n" \
+                           f"Here are the details:\n\nName: {name}\n\n\nEmail: {email}\n\n" \
+                           f"Subject: {subject}\n\nMessage: {message}"
             mail = send_mail(text_subject, text_message, EMAIL_HOST_USER,
                              [email], fail_silently=False)
             if mail:
@@ -247,6 +248,7 @@ class SearchView(ListView):
     def get_queryset(self):
         return Product.objects.filter(
             title__icontains=self.request.GET.get('text'))
+
 
 
 class AddReviewView(View):
